@@ -152,7 +152,7 @@ const CreditCard = () => {
           <img src="/visa.svg" alt="" className="w-[72px] h-[48px]" />
         </div>
 
-        <div>
+        <div className="w-full">
           <CardNum
             numInput={numInput}
             setNumInput={setNumInput}
@@ -161,11 +161,11 @@ const CreditCard = () => {
               setCreditInput((prev) => ({ ...prev, cardNumber: value }))
             }
           />
-          <div className="flex justify-between items-end mb-3">
+          <div className="flex justify-between items-end mb-3 gap-1">
             <input
               type="text"
               name="username"
-              className="credit-user text-white uppercase tracking-widest"
+              className="credit-user text-white uppercase tracking-widest basis-4/5"
               placeholder="Your Name"
               value={creditInput.username}
               onChange={handleUserName}
@@ -183,7 +183,7 @@ const CreditCard = () => {
                   onChange={handleValidThru}
                   placeholder="mm"
                 />
-                <span className="mx-2 text-white text-xl">/</span>
+                <span className="mx-2 text-white text-lg">/</span>
                 <input
                   type="text"
                   name="year"
@@ -198,7 +198,7 @@ const CreditCard = () => {
           </div>
           <div
             id="payment"
-            className="flex items-end justify-between h-[42px] space-x-2-x-4"
+            className="flex gap-1 items-end justify-between h-[42px] space-x-2-x-4"
           >
             <div className="basis-4/5 flex items-center h-full border-2">
               <select
@@ -376,7 +376,7 @@ const CreditCard = () => {
                 type="text"
                 value={creditInput.amount}
                 onChange={handleAmount}
-                className="amount bg-black"
+                className="amount bg-black w-full"
                 placeholder="Enter Amount"
               />
             </div>
