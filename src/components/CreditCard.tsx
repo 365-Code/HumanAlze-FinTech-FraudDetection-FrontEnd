@@ -161,11 +161,11 @@ const CreditCard = () => {
               setCreditInput((prev) => ({ ...prev, cardNumber: value }))
             }
           />
-          <div className="flex justify-between items-end mb-3 gap-1">
+          <div className="flex justify-between items-end mb-3 gap-1 w-full">
             <input
               type="text"
               name="username"
-              className="credit-user text-white uppercase tracking-widest basis-4/5"
+              className="credit-user text-white uppercase tracking-widest w-full flex-1"
               placeholder="Your Name"
               value={creditInput.username}
               onChange={handleUserName}
