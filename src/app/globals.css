@@ -2,32 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  margin: 0;
+  padding: 0%;
+  box-sizing: border-box;
+  transition: all;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @apply flex flex-col h-screen;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+input {
+  @apply outline-none py-2;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.credit-card {
+  @apply bg-black w-full max-w-[480px] h-[300px] rounded-xl flex flex-col justify-between relative px-4 py-6 transition-all;
+}
+
+.card-num-box {
+  @apply flex justify-between items-center gap-2;
+}
+
+.card-num-box input:focus {
+  @apply border-blue-500 transition-all;
+}
+
+.card-num-input {
+  @apply flex-1 max-w-[100px] px-4 py-2 bg-transparent border-2 border-white text-white rounded-xl outline-none text-center;
+}
+
+.credit-card .credit-user {
+  @apply border-b-2 border-gray-300 bg-transparent px-2;
+}
+
+.credit-card .valid-thru {
+  @apply flex items-center gap-1;
+}
+
+.credit-card .valid-thru input {
+  @apply w-10 bg-transparent border-b-2 text-white text-center;
+}
+
+
+.credit-card .amount{
+  @apply flex-1 px-4 bg-transparent text-white;
+}
+
+.currency{
+  @apply bg-white text-black font-medium h-full text-center outline-none w-fit;
+}
+
+.credit-card .cvv{
+  @apply w-[50px] text-center font-semibold bg-transparent border-2 text-white;
+}
+
+.btn{
+  @apply min-w-fit w-[300px] mx-auto max-w-full text-center p-4 my-2 transition-all;
+}
+
+.btn:disabled{
+  @apply bg-slate-300 text-black;
+}
+
+.fraud{
+    @apply bg-red-600;
+    animation: shake 0.3s linear forwards;
+    transition: all linear;
+}
+
+@keyframes shake{
+  0%{
+    transform: translateX(0);
+  } 25%{
+    transform: translateX(-10px);
+  } 50%{
+    transform: translateX(0);
+  } 75%{
+    transform: translateX(10px);
+  } 100%{
+    transform: translateX(0);
+  }
+}
+
+
+.not-fraud{
+  @apply bg-blue-600;
+  animation: pop-up 0.5s linear;
+  transition: all;
+}
+
+@keyframes pop-up{
+  0%{
+    transform: scale(0.9);
+  } 25%{
+    transform: scale(0.95);
+  } 50%{
+    transform: scale(1);
+  } 75%{
+    transform: scale(1.05);
+  } 100%{
+    transform: scale(1);
   }
 }
