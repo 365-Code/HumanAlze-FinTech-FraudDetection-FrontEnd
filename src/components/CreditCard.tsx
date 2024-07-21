@@ -46,13 +46,13 @@ const CreditCard = () => {
 
   const handleValidThru = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    if (value && !Number(value)) return;
+    // if (value && value != "0" && !Number(value)) return;
     if (
       (name == "month" && Number(value) && Number(value) > 12) ||
       (value && Number(value) <= 0)
     )
       return;
+
     setCreditInput((prev) => ({
       ...prev,
       validThru: { ...prev.validThru, [name]: value },
@@ -89,7 +89,10 @@ const CreditCard = () => {
           amount: Number(creditInput.amount),
         }),
       });
+
       const result = await response.json();
+      console.log(result);
+
       setFraudState((prev) => ({ ...prev, fraud: result.isFraud }));
       handleFraudState(result.isFraud);
     } catch (error) {
@@ -102,8 +105,9 @@ const CreditCard = () => {
       !creditInput.amount ||
       !creditInput.cvv ||
       !creditInput.username ||
-      !creditInput.validThru ||
-      !creditInput.cardNumber
+      !creditInput.validThru.month ||
+      !creditInput.validThru.year ||
+      (creditInput.cardNumber.length != 16)
     )
       return;
 
@@ -145,8 +149,15 @@ const CreditCard = () => {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-full flex flex-col">
-      <div className={`credit-card ${fraudState.fraud == 0 ? "bg-transparent" : "bg-slate-900"}`} >
-        <div className="credit-overlay -z-10" style={{width: `${fraudState.fraud == 0 ? "100%" : "0"}`}} />
+      <div
+        className={`credit-card ${
+          fraudState.fraud == 0 ? "bg-transparent" : "bg-slate-900"
+        }`}
+      >
+        <div
+          className="credit-overlay -z-10"
+          style={{ width: `${fraudState.fraud == 0 ? "100%" : "0"}` }}
+        />
         <div className="flex justify-between w-full items-center">
           <h2 className="font-medium text-white">Credit</h2>
           <img src="/visa.svg" alt="" className="w-[72px] h-[48px]" />
@@ -200,7 +211,7 @@ const CreditCard = () => {
             id="payment"
             className="flex gap-1 items-end justify-between h-[42px] space-x-2-x-4"
           >
-            <div className="basis-4/5 flex items-center h-full border-2">
+            <div className="flex-1 flex items-center h-full border-2">
               <select
                 defaultValue={"INR"}
                 className="currency"

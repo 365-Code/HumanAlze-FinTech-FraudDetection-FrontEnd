@@ -29,7 +29,7 @@ const CardNum = ({
 }: CardNumProps) => {
   const handleNumInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (value && !Number(value)) return;
+    if ( value && value != '0' && !Number(value) ) return;
     setNumInput((prev) => ({ ...prev, [name]: value }));
   };
 
